@@ -1,0 +1,82 @@
+site_name: enECMO 
+site_description: Software Development Documentation EN62304
+site_author: DS MB TS
+copyright: ELK GmbH, Gladbacher Straße 232, 47805 Krefeld
+theme:
+    name: material
+    palette:
+        primary: indigo
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - plantuml_markdown:
+      server: ''
+      format: svg
+
+plugins:
+    - include-markdown
+    - build_plantuml:
+        render: "local" #server or "local" for local rendering
+        bin_path: "/usr/local/bin/plantuml" # ignored when render: server
+        server: "http://www.plantuml.com/plantuml" # offical plantuml server
+        output_format: "svg" # or "png"
+        diagram_root: "docs/Diagrams" # should reside under docs_dir
+        output_folder: "rendered"
+        input_folder: "src"
+        input_extensions: "" # comma separated list of extensions
+    - with-pdf:
+        author: Dieter Steuten
+        copyright: ELK GmbH, Gladbacher Straße 232, 47805 Krefeld
+        cover: true
+        back_cover: false
+        #cover_title: enECMO
+        #cover_subtitle: Software Development Documentation EN62304
+        #design: elk_en62304_template/style.css
+        custom_template_path: templates
+        toc_title: Table of content
+        heading_shift: true
+        toc_level: 3
+        ordered_chapter_level: 2
+        #excludes_children:
+        #    - 'release-notes/:upgrading'
+        #    - 'release-notes/:changelog'
+        #
+        #exclude_pages:
+        #    - "Project Description"
+        #    - "Develop/"
+        #    - 'appendix/contribute/'
+        #convert_iframe:
+        #    - src: IFRAME SRC
+        #      img: POSTER IMAGE URL
+        #      text: ALTERNATE TEXT
+        #    - src: ...
+        #two_columns_level: 3
+        #
+        #render_js: true
+        #headless_chrome_path: headless-chromium
+        #
+        output_path: 'Project_Documentation.pdf'
+        #enabled_if_env: ENABLE_PDF_EXPORT
+        #
+        #debug_html: true
+        #show_anchors: true
+        verbose: true
+    - ezlinks
+nav:
+    - EN62304 Baseline: EN62304/Baseline.md
+    - Software Development Plan: EN62304/SDP.md
+    - Concept Design Document: EN62304/CDD.md
+    - Software Requirements Document: EN62304/SRD.md
+    - Software Component List: EN62304/SCL.md
+    - Software Development Environment: EN62304/SDE.md
+    - Test Analysis Specification: EN62304/TAS.md
+    - Test Analysis Report: EN62304/TAR.md
+    - Software Release Notes: EN62304/SRN.md
+    - Revision Level History: EN62304/RLH.md
+    - Coding Conventions Document: EN62304/CCD.md
+    - SOUP Component List: EN62304/SOL.md
+    #- Software Usability Plan: EN62304/SUP.md

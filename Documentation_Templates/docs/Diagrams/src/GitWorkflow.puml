@@ -1,0 +1,57 @@
+@startuml
+circle "master" as ma
+circle "release" as re
+circle "test" as te
+circle "issue" as iss
+storage #white "future" as fu
+
+storage "m_1" as m_1
+storage "m_2" as m_2
+storage "m_3" as m_3
+
+storage "r_1" as r_1
+storage "r_2" as r_2
+
+storage "t_1" as t_1
+storage "t_2" as t_2
+
+storage "i_1" as i_1
+storage "i_2" as i_2
+storage "i_3" as i_3
+
+
+ma -[#red,dotted,thickness=8]up- m_1
+m_1 -[#red,dotted,thickness=8]up- m_2 
+m_2 -[#red,dotted,thickness=8]up- m_3 
+m_3 -[#white,dashed,thickness=8]up-> fu
+
+iss -[#red,dotted,thickness=8]up- i_1
+m_1 -right-> i_1 : Ready for implementation\n(checkout -b)
+i_1 -up-> i_2 : Ready for implementation\n(checkout -b)
+i_2 -[#white,dashed]up-> fu
+i_2 -[#blue,dashed]up-> i_3:pull request
+i_1 -up-> i_3 : Ready for implementation\n(checkout -b)
+i_3 -[#blue,dashed]-> m_2 : Ready for Testing
+i_3 -[#white,dashed,thickness=8]up-> fu
+
+re -[#red,dotted,thickness=8]up- r_1
+m_1 -[#blue,dashed]left-> r_1 :Ready for Release
+r_1 -[#red,dotted,thickness=8]up- r_2
+m_3 -[#blue,dashed]left-> r_2 :Ready for Release
+r_2 -[#white,dashed]up-> fu
+
+te -[#red,dotted,thickness=8]up- t_1
+m_1 -[#blue,dashed]left-> t_1 :Ready for Design Transfer
+t_1 -[#white,dashed]right-> m_1
+t_1 --> m_2 : commit
+t_1 -[#red,dotted,thickness=8]up- t_2
+m_2 -[#blue,dashed]left-> t_2 :Ready for Design Transfer
+t_2 -right-> m_3 : commit
+t_2 -[#white,dashed]up-> fu
+
+
+ma -[#white]right- iss
+ma -[#white]left- re
+ma -[#white]left- te
+
+@enduml

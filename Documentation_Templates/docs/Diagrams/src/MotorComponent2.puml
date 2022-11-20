@@ -1,0 +1,15 @@
+![](../rendered/MotorComponent2.svg)
+@startuml
+  component "Motor unit" as motorunit {
+    rectangle "Motor control" as motorcontrol
+    rectangle "Motor driver" as motordriver
+  }
+  component "Pump unit" as pumpunit {
+    rectangle "Pump with\nspeed sensor" as motor
+  }
+
+  motorcontrol -r-> motordriver: "command speed"
+  motordriver -[#blue]l-> motorcontrol: "actual speed"
+  motor -u-> motordriver: "actual\nspeed"
+  motordriver -d-> motor: "control value\n(PWM)"
+@enduml

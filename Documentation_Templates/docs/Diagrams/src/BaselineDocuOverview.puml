@@ -1,0 +1,10 @@
+@startuml BaselineDocuIntroduction
+rectangle "Market Requirement Document (MRD)" as MRD
+rectangle "Continuous-Driven Development Document (CDDD)" as CDDD #A9DCDF
+rectangle "Generated Documents (EN 62304)" as GD
+rectangle "Software Development Plan (SDP)" as SDP
+
+MRD --> CDDD
+SDP --> CDDD
+CDDD --> GD
+@enduml

@@ -1,0 +1,8 @@
+@startwbs UpdateHirachie
+* HMI 
+** GatewaySafety
+*** Emergency 
+*** Motor 
+*** Gasblender 
+*** Sensors 
+@endwbs

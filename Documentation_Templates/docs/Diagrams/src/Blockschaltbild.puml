@@ -1,0 +1,39 @@
+@startuml Blockschaltbild
+rectangle "System"{
+    rectangle "Class A" as CA{
+        rectangle "High Level User Unit" as HLUU
+        rectangle "High Level User Extension" as HLUE
+    }
+    rectangle "Class C" as CC{
+        rectangle "Measurement Unit" as MU{
+            rectangle "Sensors (func)"
+        }
+        rectangle "Engine Unit" as EU{
+            rectangle "Motor (func)"
+        }
+
+        rectangle "Gateway Safety Unit" as GSU{
+            rectangle "Alarm Unit" as AU
+        }
+
+        rectangle "Physical Unit" as PhU{
+            rectangle "Oxygen" as OU{
+                rectangle "OSensors (tech)"
+                rectangle "OMotor (tech)"
+            }
+            rectangle "Blood" as BU{
+                rectangle "BSensors (tech)"
+                rectangle "BMotor (tech)"
+            }
+
+        }
+    }
+}
+
+CA -[#white]d-> CC
+CC -[#white]d-> GSU
+GSU -[#white]d-> MU
+MU -[#white]r-> EU
+EU -[#white]d-> PhU
+BU -[#white]r-> OU
+@enduml

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@page { margin: 2cm }
+
+.markdown-body {
+  --md-code-background: #e3dcef;
+  --md-code-text: #4a2b7b;
+  --md-code-tabs: #c6b8dd;
+  --md-code-radius: 4px;
+}
+
+@media print {
+    .page-break	{ display: block; page-break-before: always; }
+  
+    h1 {        font-size: 18pt;      page-break-after:avoid;             page-break-inside:avoid  }
+    h2 {        font-size: 14pt;        }
+    h3 {        font-size: 12pt;        }
+    h4 {        font-size: 12pt;        }
+
+    #page-header {
+            display: block;
+            position: running(header);
+        }
+
+    #page-footer {
+            display: block;
+            position: running(footer);
+        }
+
+    .page-number:before {
+            content: counter(page); 
+        }
+
+    .page-count:before {
+            content: counter(pages);  
+        }
+}
+

@@ -1,0 +1,24 @@
+![](../rendered/PU.svg)
+<!--
+@startuml
+  rectangle "Engine Technical Unit" as ETU {
+    rectangle "Motor control" as motorcontrol
+    rectangle "Motor driver" as motordriver
+  }
+
+  rectangle "Therapy Sensors Unit" as tsu
+  rectangle "Engine sensor unit \n(Pump-/Motor sensors,\nPressure, Temperature)" as esu
+  rectangle "Blood Unit" as bu {
+    rectangle "Motor-/Pump with\nsensors" as motor
+  }
+
+  tsu -d-> motorcontrol: "Sets pump speed"
+  esu -d-> motorcontrol: "vital parameters"
+  motorcontrol -d-> motordriver: "command\nspeed"
+  motordriver -[#blue]u-> motorcontrol: "actual\nspeed"
+  motordriver -d-> motor: "control value\n(PWM)"
+  motor -u-> motordriver: "actual speed\n(from speed sensor)"
+  motor -> bu
+  bu -u-> tsu
+@enduml
+-->

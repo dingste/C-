@@ -1,0 +1,26 @@
+@startuml CDDArchitecture
+rectangle "Software Architecture"{
+    rectangle "Intended Use (as Planet)" as iu
+    storage "Continents" as cont
+        storage "States" as stat
+    storage "Counties" as count
+        storage "Cities" as city
+    storage "Districts" as dis
+    storage "Streets" as street 
+    storage "Houses" as house
+
+iu -d-> cont 
+iu -d-> stat 
+iu -d-> count 
+iu -d-> city 
+iu -d-> dis 
+iu -d-> street 
+iu -d-> house 
+cont -r->stat
+stat -r->count
+count -r->city
+city -r->dis
+dis -r->street
+street -r->house
+}
+@enduml

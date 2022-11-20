@@ -1,0 +1,37 @@
+![](../rendered/TherapyControlAndMonitoring.svg)
+@startuml
+  allow_mixing
+
+  actor "User" as user
+
+  component "Therapy control\nand monitoring\n(HMI)" as hmi {
+    component "Monitor\n(like LCD)" as monitor {
+      state LCD <<inputPin>>
+      state SensorIF <<outputPin>>
+      state MotorState <<outputPin>>
+    }
+    component "Input\n(like touch pad)" as input {
+      state Touch <<inputPin>>
+      state MotorCmd <<outputPin>>
+    }
+    component "Error signaling\n(LEDs, acoustic signals)" as error {
+      state EMCYDsp <<inputPin>>
+      state EMCY <<outputPin>>
+    }
+  }
+  component "Sensor unit" as sensorunit
+  component "Motor unit" as motorunit
+
+  ' arrange components using hidden lines:
+  monitor -[hidden]r- input
+  input -[hidden]r- error
+
+  sensorunit --[#blue]u0)-> SensorIF: "vital parameters\nfor monitoring"
+  sensorunit -[#blue]u0)-> EMCY
+  motorunit -[#blue]u0)-> EMCY
+  motorunit -[#blue]u0)-> MotorState
+  MotorCmd -d0)-> motorunit: "therapy control"
+  user -d-> Touch: "motor control\nerror reaction"
+  LCD -[#blue,dashed]up-> user: "information"
+  EMCYDsp -[#blue,dashed]up-> user: "information"
+@enduml

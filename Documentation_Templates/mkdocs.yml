@@ -1,0 +1,62 @@
+site_name: {{PROJECT_NAME}}
+site_description: Function Planning Overall Overview
+site_author: DS
+copyright: dingste.de
+theme:
+    name: material
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - plantuml_markdown:
+      server: http://www.plantuml.com/plantuml
+
+
+plugins:
+    - include-markdown
+    - build_plantuml:
+        render: "local" #server or "local" for local rendering
+        bin_path: "/usr/local/bin/plantuml" # ignored when render: server
+        server: "http://www.plantuml.com/plantuml" # offical plantuml server
+        output_format: "svg" # or "png"
+        diagram_root: "docs/Diagrams" # should reside under docs_dir
+        output_folder: "rendered"
+        input_folder: "src"
+        input_extensions: "" # comma separated list of extensions
+    - ezlinks:
+        warn_ambiguities: true
+        
+
+nav:
+    - Project Description:
+        - Description: index.md
+        - Planning: Description/PlanningParadigm.md
+        - Glossar: Description/Glossar.md
+        - Intended Use: Description/IntendedUse.md
+        - Naming: 
+            - Components: Description/ComponentNaming.md
+            - Functions: Description/FunctionNaming.md
+            - Variables: Description/VariableAndTypeNaming.md
+        - Architecture: skeleton_md/architecture.md
+        - Architecture Navigation: skeleton_md/navigation.md
+        - Roles:
+            User: Roles/User.md
+            Patient: Roles/Patient.md
+    - Software Develop:
+        - Environment: Develop/Environment.md
+        - Paradigm: Develop/Paradigm.md
+    - EN62304:
+        - Baseline: EN62304/Baseline.md
+        - Software Development Plan: EN62304/SDP.md
+        - Coding Conventions: EN62304/CCD.md
+        - Concept Design Document: EN62304/CDD.md
+        - Software Component List: EN62304/SCL.md
+        - Software Development Environment: EN62304/SDE.md
+        - Documentation History: EN62304/History.md
+        - Revision Level History: EN62304/RLH.md
+        - SOUP Component List: EN62304/SOL.md
+        - Software Requirement Document: EN62304/SRD.md
+        - Software Usability Plan: EN62304/SUP.md
+        - Software Release Notes: EN62304/SRN.md
+        - Test Analysis Specification: EN62304/TAS.md
+        - Test Analysis Report: EN62304/TAR.md
+

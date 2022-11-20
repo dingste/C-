@@ -1,0 +1,12 @@
+@startuml
+ (*) --> "Bootup"
+ "Bootup" --> "Selfcheck"
+ "Selfcheck" --> "Sensor-Calibration"
+ "Sensor-Calibration" --> "Priming"
+ "Priming" --> "Perfusion"
+ "Priming" --> "Pause"
+ "Priming" --> "Deep Sleep"
+ "Perfusion" --> (*)
+ "Pause" --> "Perfusion"
+ "Deep Sleep" -->  "Selfcheck"
+@enduml

@@ -1,0 +1,59 @@
+![](../rendered/RawStructure.svg)
+<!--
+@startuml RawStructure
+  actor "User" as user
+  actor "Patient" as patient
+
+  component "Power Unit" as pu
+
+  component "Measurement Unit" as mu {
+    together {
+      rectangle "spO2" as spo2
+      rectangle "HCT" as hct
+      rectangle "Pyroscience" as pyroscience
+      rectangle "Temperature" as temperature
+    }
+    component "Motor sensors" as motorsensors {
+      rectangle "Sonoflow" as sonoflow
+      rectangle "Sonocheck" as sonocheck
+      rectangle "Pressure" as pressure
+    }
+  }
+
+  component "Gateway Safety Unit" as gsu
+  component "Blood Unit" as bu
+
+  component "Engine Unit" as eu
+
+  component "High Level user Unit (HLUU)" as hluu {
+    together {
+      rectangle "Monitor\n(like LCD)" as monitor
+      rectangle "Input (like touch pad)" as input
+      rectangle "Error signaling\n(LEDs, acoustic signals)" as error
+    }
+    rectangle "additional interfaces (LAN/WLAN,BT/BLE,5G,SDC,USB...)" as extif
+  }
+
+  ' ----------------------------------------------------------------------------
+  ' arrange components using hidden lines:
+  spo2 -[hidden]d- hct
+  pyroscience -[hidden]d- temperature
+  extif -[hidden]u- input
+  pu -[hidden]r- bu
+  ' ----------------------------------------------------------------------------
+
+  user -[#red]d-> input: "motor control\nerror reaction"
+  monitor -[#blue,dashed]u-> user: "information"
+  error -[#blue,dashed]u-> user: "information"
+
+  'hluu <-[#blue]u- mu: "vital parameters\nfor monitoring"
+  'motorsensors -> motorunit: "vital parameters\nfor motor control"
+  'hluu -d-> motorunit: "therapy control"
+  hluu <---[#red]-> gsu: "therapy\ncontrol"
+  mu -[#blue]d-> gsu: "vital parameters\nfor monitoring\nand input for\ncontrolling"
+  gsu -[#red]d-> eu: "sets pumping\nparameters"
+  bu -[#blue]l-> mu: "measurement\nof vital data"
+  eu -[#red]-> bu: "drives"
+  patient <-[#red]u-> bu: "invasive @patient"
+@enduml
+-->

@@ -1,0 +1,10 @@
+ @startuml PStructure
+  frame "Unit" as U {
+  rectangle "Functional" as F
+  rectangle "Technical" as T
+  circle "Interface" as I
+  }
+
+ T <--> F
+ T -> I
+@enduml

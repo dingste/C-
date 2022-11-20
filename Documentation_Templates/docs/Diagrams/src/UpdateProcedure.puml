@@ -1,0 +1,12 @@
+@startuml UpdateProcedure
+"node n" -> "node n+1" : request
+hnote over "node n+1": enter update case
+    "node n" <- "node n+1" : ready
+    loop [individual firmware size]
+        "node n" -> "node n+1" : chunk send
+        hnote over "node n+1": decompress
+        "node n" <- "node n+1" : chunk n/ack
+    end
+hnote over "node n+1": leave update case
+"node n" <- "node n+1" : finsh n/ack
+@enduml

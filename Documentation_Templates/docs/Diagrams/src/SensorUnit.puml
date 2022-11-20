@@ -1,0 +1,44 @@
+![](../rendered/SensorUnit.svg)
+@startuml SensorUnit
+  allow_mixing
+  component "Sensor unit" as sensors {
+    together {
+      component "spO2" as spo2
+      component "HCT" as hct
+      component "Pyroscience" as pyroscience
+      component "Temperature" as temperature
+    }
+    component "Motor sensors" as motorsensors {
+      component "Sonoflow" as sonoflow
+      component "Sonocheck" as sonocheck
+      component "Pressure" as pressure
+      state MotorSensorValues <<expansionOutput>>
+    }
+    state SensorValues <<expansionInput>>
+  }
+
+  component "Motor unit" as motorunit
+
+  component "Therapy control\nand monitoring\n(HMI)" as hmi
+
+  ' arrange components using hidden lines:
+  sonoflow -[hidden]r- sonocheck
+  sonocheck -[hidden]r- pressure
+  spo2 -[hidden]r- hct
+  hct -[hidden]r- pyroscience
+  pyroscience -[hidden]r- temperature
+
+  SensorValues -[#blue]u0)-> hmi: "vital parameters\nfor monitoring"
+  MotorSensorValues -d0)-> motorunit: "vital parameters\nfor motor control"
+
+  spo2 -[#blue]u0)-> SensorValues
+  hct -[#blue]u0)-> SensorValues
+  pyroscience -[#blue]u0)-> SensorValues
+  temperature -[#blue]u0)-> SensorValues
+  sonoflow -[#blue]u0)-> SensorValues
+  sonocheck -[#blue]u0)-> SensorValues
+  pressure -[#blue]u0)-> SensorValues
+  sonoflow -d0)-> MotorSensorValues
+  sonocheck -d0)-> MotorSensorValues
+  pressure -d0)-> MotorSensorValues
+@enduml

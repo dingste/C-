@@ -1,0 +1,17 @@
+![](../rendered/EU.svg)
+<!--
+@startuml
+  rectangle "Therapy monitoring" as hmi
+  rectangle "Motor control sensors \n(Pressure, Sonoflow, Sonocheck)" as sensors
+  rectangle "Motor control" as motorcontrol
+  rectangle "Motor driver" as motordriver
+  rectangle "Pump with\nspeed sensor" as motor
+
+  hmi -down-> motorcontrol: "Sets pump speed"
+  motorcontrol -[#blue]up-> hmi: "actaul speed"
+  sensors -> motorcontrol: "vital parameters"
+  motorcontrol -> motordriver: "command\nspeed"
+  motordriver -[#blue]up-> motorcontrol: "actual\nspeed"
+  motordriver -> motor: "control value\n(PWM)"
+  motor -up-> motordriver: "actual speed\n(from speed sensor)"
+@enduml -->

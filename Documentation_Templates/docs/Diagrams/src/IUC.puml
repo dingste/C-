@@ -1,0 +1,8 @@
+@startuml IUC
+component "Unit A" as UA
+component "Unit B" as UB
+
+UA --> UB: "one directional"
+UA <--> UB: "bi directional"
+UA <-- UB: "one directional"
+@enduml

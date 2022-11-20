@@ -1,0 +1,25 @@
+![](../rendered/sensors.svg)
+@startuml Sensors
+  component "Sensor unit" as sensors {
+    rectangle "spO2" as spo2
+    rectangle "HCT" as hct
+    rectangle "Pyroscience" as pyroscience
+    rectangle "Temperature" as temperature
+    component "Motor sensors" as motorsensors {
+      rectangle "Sonoflow" as sonoflow
+      rectangle "Sonocheck" as sonocheck
+      rectangle "Pressure" as pressure
+    }
+  }
+  rectangle "Motor control" as motorunit
+  rectangle "Therapy monitoring" as hmi
+
+  spo2 -> hmi
+  hct -> hmi
+  pyroscience -> hmi
+  sonoflow -> motorunit
+  sonocheck -> motorunit
+  pressure  -> motorunit
+  pressure -[dashed]-> hmi
+  temperature -[dashed]-> hmi
+@enduml

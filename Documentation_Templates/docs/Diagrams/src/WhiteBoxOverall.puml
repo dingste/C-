@@ -1,0 +1,53 @@
+![](../rendered/WhiteBoxOverall.svg)
+<!--
+@startuml WhiteBoxOverall
+  allow_mixing
+  actor "User" as user
+  package "enECMO" {
+    component "Therapy control\nand monitoring\n(HMI)" as hmi {
+      state Touch <<inputPin>>
+      state LCD   <<inputPin>>
+      state Error <<inputPin>>
+      state Emergency  <<outputPin>>
+      state SensorIF   <<outputPin>>
+      state MotorCmd   <<outputPin>>
+      state MotorState <<outputPin>>
+    }
+    component "Sensor unit" as sensors {
+      state SensorValues <<inputPin>>
+    }
+    component "Motor unit" as motorunit {
+      state MotorValue <<inputPin>>
+      state MotorCtrl <<inputPin>>
+      state PumpCmd <<outputPin>>
+      state Sensors <<outputPin>>
+    }
+    component "Gateway\nSafety unit" as gsu {
+      state gsu_sensorout <<inputPin>>
+      state gsu_sensorin <<outputPin>>
+    }
+    component "Power\nsupply" as powersupply
+  }
+  component "Pump unit" as pumpunit
+  note bottom of pumpunit : out of projects scope
+
+  ' arrange components using hidden lines:
+  hmi -[hidden]r- powersupply
+
+  user --d-> Touch: "operates\nECMO"
+  LCD -[#blue,dashed]up-> user: "state of\ntherapy"
+  Error -[#blue,dashed]up-> user: "Emergency\nsignaling"
+
+  MotorCmd -[#blue]d(0-> MotorCtrl: "sets pumping\nparameters"
+  MotorValue -d0)-> MotorState: "sets pumping\nparameters"
+  motorunit -u(0-> Emergency: "emergency\nsignals"
+  sensors -u(0-> Emergency: "emergency\nsignals"
+
+  SensorValues -u0)-> Sensors: "input for\ncontrolling"
+  SensorValues -u0)-> gsu_sensorin: "vital\nparameters\nfor monitoring"
+  gsu_sensorout -u0)-> SensorIF: "vital\nparameters\nfor monitoring"
+'  SensorValues -u0)-> SensorIF: "vital\nparameters\nfor monitoring"
+
+  pumpunit <-u-> PumpCmd: "pump control"
+@enduml
+-->

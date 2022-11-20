@@ -1,0 +1,6 @@
+@startuml SensorComponent
+  component "Sensor Component" as sensorcomponent {
+    class "Sensor driver" as sensordrv
+    class "Sensor API" as sensorapi
+  }
+@enduml 

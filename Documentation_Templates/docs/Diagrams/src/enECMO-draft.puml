@@ -1,0 +1,18 @@
+![](../rendered/enECMO-draft.svg)
+@startuml
+  rectangle "Blood tube" as blood_tube
+  rectangle "Sensors" as sensors
+  rectangle "Motor unit" as motorunit
+  rectangle "Therapy control and monitoring" as hmi
+  rectangle "Pump" as pump
+  actor "User" as user
+
+  pump -[#blue]-> blood_tube: "pumps blood"
+  motorunit -[#blue]-> pump: "drives"
+  hmi -[#blue]-> motorunit: "sets pumping parameters"
+  user -[#blue]-> hmi: "operates ECMO"
+  hmi -> user: "state of therapy"
+  sensors <-- blood_tube : "measurement of vital data"
+  sensors -> motorunit: "input for controlling"
+  sensors -> hmi: "vital parameters for monitoring"
+@enduml
