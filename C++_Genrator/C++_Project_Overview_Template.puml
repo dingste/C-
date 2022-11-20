@@ -1,0 +1,28 @@
+@startuml "C++ Project"
+rectangle "Project_NAME" as project{
+    rectangle INPUT{
+
+    }
+    rectangle PROCESSING{
+
+    }
+    rectangle OUTPUT{
+        
+    }
+
+    INPUT -r-> PROCESSING
+    PROCESSING -r-> OUTPUT
+
+}
+
+rectangle CUPS{
+    rectangle target_boilerplate
+    rectangle algorithms
+    rectangle GUI_Framework
+    rectangle I2C
+    rectangle UART
+    rectangle SPI
+}
+
+project <-d- CUPS
+@enduml
