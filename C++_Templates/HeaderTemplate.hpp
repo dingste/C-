@@ -33,13 +33,11 @@
 
 /* --- Includes --- */
 #include <stdint.h>
-#include "Components/EVA/EVA.hpp"
-#include <iostream>
+#include "IPO/IPO.hpp"
 //derivate includes
 
 /* --- type --- */
 struct T_NAME{
-    char signature = 'X';
     bool change_request = false;
     int foo = 0; // put **ALL** processable data in here
     //derivate _Data_Create
@@ -51,7 +49,7 @@ struct T_NAME{
 };
 
 /* --- Interface --- */
-class I_NAME : public I_EVA<T_NAME> {
+class I_NAME : public I_IPO<T_NAME> {
 public:
     virtual ~I_NAME() {
         //derivate _Del_Instance
@@ -67,35 +65,6 @@ public:
         }
     }
     // override in concrete class virtual bool P(bool) = 0;
-  
-  /* be precise, if use
-    std::ostream& operator<<(std::ostream& out, const T_NAME& transmit) {
-    out << transmit.signature << SERIALIZE_START
-        << transmit.foo << SERIALIZE_DELIMITER
-        << transmit.foo  << SERIALIZE_END;
-    return out;
-    }
-    
-    std::istream& operator>>(std::istream& in, T_NAME& transmit) {
-    char singlechar;
-
-    in >> singlechar;
-    transmit.signature = (char) singlechar;
-    in >> singlechar;
-    if (singlechar == SERIALIZE_START) {
-        in >> transmit.foo;
-        in >> singlechar;
-        if (singlechar == SERIALIZE_DELIMITER) {
-            in >> transmit.foo;
-            in >> singlechar;
-            if (singlechar != SERIALIZE_END) {
-                //deserializationAssert();
-                //in.clear();
-            }
-        }
-    }
-    return in;
-    }*/
     
    protected:
     T_NAME data = T_NAME();
@@ -109,7 +78,7 @@ public:
     virtual ~NAME(){    /* delete the 'new's (if exists) directly here .. for more readiness */  };
 
 protected:
-    /* mandatory I_EVA */
+    /* mandatory I_IPO */
     bool P(bool) override; /* collect all to be do in this function */
 
     /* optional I_NAME */

@@ -22,14 +22,9 @@
 /* --- Includes --- */
 #include <stdint.h>
 
-#define SERIALIZE_START '{'
-#define SERIALIZE_DELIMITER '_'
-#define SERIALIZE_END '}'
-
 /* --- Interface --- */
 template<typename T>
-class I_IPO
-{
+class I_IPO {
 public:
     virtual ~I_IPO() {}
 
